@@ -4,12 +4,14 @@ import { store } from './store'
 import cardList from './components/cardList.vue';
 import MyHeader from './components/MyHeader.vue';
 import Search from './components/Search.vue';
+import Loading from './components/Loading.vue';
 
 export default {
   components: {
     cardList,
     MyHeader,
-    Search
+    Search,
+    Loading
 
   },
 
@@ -22,9 +24,8 @@ export default {
     getCards() {
       axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?&fname=Magician')
         .then(response => {
-          console.log(response.data);
           this.store.cardList = response.data.data;
-          console.log(this.store.cardList);
+          this.store.loading = false;
         })
     }
   },
@@ -35,6 +36,8 @@ export default {
 </script>
 
 <template>
+  <Loading />
+
   <MyHeader />
   <main>
     <Search />
