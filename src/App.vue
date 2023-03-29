@@ -1,9 +1,15 @@
 <script>
 import axios from 'axios';
 import { store } from './store'
+import cardList from './components/cardList.vue';
+import MyHeader from './components/MyHeader.vue';
+import Search from './components/Search.vue';
 
 export default {
   components: {
+    cardList,
+    MyHeader,
+    Search
 
   },
 
@@ -28,8 +34,18 @@ export default {
 }
 </script>
 
-<template></template>
+<template>
+  <MyHeader />
+  <main>
+    <Search />
+    <cardList />
+  </main>
+</template>
 
 <style scoped lang="scss">
 @use './styles/general.scss';
+
+main {
+  background-color: rgb(212, 143, 56);
+}
 </style>
