@@ -17,6 +17,8 @@ export default {
       axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?&fname=Magician')
         .then(response => {
           console.log(response.data);
+          this.store.cardList = response.data.data;
+          console.log(this.store.cardList);
         })
     }
   },
@@ -28,4 +30,6 @@ export default {
 
 <template></template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@use './styles/general.scss';
+</style>
