@@ -5,14 +5,15 @@ import cardList from './components/cardList.vue';
 import MyHeader from './components/MyHeader.vue';
 import Search from './components/Search.vue';
 import Loading from './components/Loading.vue';
+import CardCounter from './components/CardCounter.vue';
 
 export default {
   components: {
     cardList,
     MyHeader,
     Search,
-    Loading
-
+    Loading,
+    CardCounter
   },
 
   data() {
@@ -24,7 +25,7 @@ export default {
   methods: {
     getCards() {
 
-      let urlApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
+      let urlApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?num=400&offset=0';
 
       if (store.optionSelected != 'all') {
         urlApi += `?&archetype=${store.optionSelected}`
@@ -63,6 +64,7 @@ export default {
   <MyHeader />
   <main>
     <Search @doFilter="getCards" />
+    <CardCounter :cardCount="store.cardList.length" />
     <cardList />
   </main>
 </template>
@@ -72,6 +74,6 @@ export default {
 
 main {
   background-color: rgb(212, 143, 56);
-  height: 100vh;
+  height: 100%;
 }
 </style>

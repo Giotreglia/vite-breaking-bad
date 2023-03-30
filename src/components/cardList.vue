@@ -30,7 +30,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     max-width: 1170px;
-    height: 100%;
+    height: calc(100vh - 300px);
     margin: auto;
     background-color: white;
     padding: 20px;
@@ -47,6 +47,12 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        scale: 1.02;
+    }
 }
 
 @media all and (min-width: 576px) {
