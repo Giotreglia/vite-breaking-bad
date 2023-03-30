@@ -1,15 +1,20 @@
 <script>
+import { store } from '../store.js'
+
 export default {
     name: 'Search',
+    data() {
+        return {
+            store,
+        }
+    }
 }
 </script>
 
 <template>
     <nav>
-        <select name="type" id="type-select">
-            <option value="alien">Alien</option>
-            <option value="alien">Alien</option>
-            <option value="alien">Alien</option>
+        <select name="type" id="type-select" @change="$emit('doFilter')" v-model="store.optionSelected">
+            <option :value="type" v-for="(type, i) in store.searchOptions" :key="i">{{ type }}</option>
         </select>
     </nav>
 </template>

@@ -17,12 +17,22 @@ export default {
 
   data() {
     return {
-      store
+      store,
+      isContained: false
     }
   },
   methods: {
     getCards() {
-      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?&fname=Magician')
+
+      let urlApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
+
+      if (store.optionSelected != 'all') {
+        urlApi += `?&archetype=${store.optionSelected}`
+      }
+
+      /* ?&archetype=${} */
+
+      axios.get(urlApi)
         .then(response => {
           this.store.cardList = response.data.data;
           this.store.loading = false;
@@ -31,6 +41,18 @@ export default {
   },
   created() {
     this.getCards();
+
+    axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+      .then(response => {
+        response.data.forEach(element => {
+          if (store.searchOptions.includes(element.archetype_name)) {
+            this.isContained = true;
+          } else {
+            store.searchOptions.push(element.archetype_name);
+          }
+        });
+      });
+
   }
 }
 </script>
@@ -40,7 +62,7 @@ export default {
 
   <MyHeader />
   <main>
-    <Search />
+    <Search @doFilter="getCards" />
     <cardList />
   </main>
 </template>
@@ -50,5 +72,6 @@ export default {
 
 main {
   background-color: rgb(212, 143, 56);
+  height: 100vh;
 }
 </style>

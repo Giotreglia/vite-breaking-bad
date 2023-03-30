@@ -18,6 +18,8 @@ export default {
 <style scoped lang="scss">
 @use '../styles/general.scss';
 
+
+
 .image-wrapper {
     width: 100%;
     height: 80%;
